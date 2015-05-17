@@ -327,12 +327,12 @@ your extruder heater takes 2 minutes to hit the target on heating.
 #endif
 
 // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
-const bool X_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
-const bool X_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
-const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+const bool X_MIN_ENDSTOP_INVERTING = false;
+const bool Y_MIN_ENDSTOP_INVERTING = false;
+const bool Z_MIN_ENDSTOP_INVERTING = false; // RevF4 config is true, but experiment says this should be false --hovis
+const bool X_MAX_ENDSTOP_INVERTING = false;
+const bool Y_MAX_ENDSTOP_INVERTING = false;
+const bool Z_MAX_ENDSTOP_INVERTING = false;
 //#define DISABLE_MAX_ENDSTOPS
 //#define DISABLE_MIN_ENDSTOPS
 
@@ -355,7 +355,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
 
 #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+#define INVERT_Y_DIR true
 #define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
 #define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
 #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
@@ -364,7 +364,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
 #define X_HOME_DIR -1
-#define Y_HOME_DIR 1
+#define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
 
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
@@ -408,10 +408,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
   #ifdef AUTO_BED_LEVELING_GRID
 
     // set the rectangle in which to probe
-    #define LEFT_PROBE_BED_POSITION (X_MIN_POS + 15)
-    #define RIGHT_PROBE_BED_POSITION (X_MAX_POS - 15)
-    #define BACK_PROBE_BED_POSITION (Y_MIN_POS + 15)
-    #define FRONT_PROBE_BED_POSITION (Y_MAX_POS - 15)
+    #define LEFT_PROBE_BED_POSITION 15
+    #define RIGHT_PROBE_BED_POSITION 135
+    #define BACK_PROBE_BED_POSITION 15
+    #define FRONT_PROBE_BED_POSITION 135
 
      // set the number of grid points per dimension
      // I wouldn't see a reason to go above 3 (=9 probing points on the bed)
@@ -423,27 +423,28 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
     // is used to esimate the plane of the print bed
 
       #define ABL_PROBE_PT_1_X 15
-      #define ABL_PROBE_PT_1_Y 180
+      #define ABL_PROBE_PT_1_Y 15
       #define ABL_PROBE_PT_2_X 15
-      #define ABL_PROBE_PT_2_Y 20
-      #define ABL_PROBE_PT_3_X 170
-      #define ABL_PROBE_PT_3_Y 20
+      #define ABL_PROBE_PT_2_Y 135
+      #define ABL_PROBE_PT_3_X 135
+      #define ABL_PROBE_PT_3_Y 135
 
   #endif // AUTO_BED_LEVELING_GRID
 
 
   // these are the offsets to the probe relative to the extruder tip (Hotend - Probe)
-  #define X_PROBE_OFFSET_FROM_EXTRUDER -26
+  #define X_PROBE_OFFSET_FROM_EXTRUDER 26
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 1
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -5
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER 5
+  // sort of kind of measured --hovis
 
-  #define Z_RAISE_BEFORE_HOMING 4       // (in mm) Raise Z before homing (G28) for Probe Clearance.
+  #define Z_RAISE_BEFORE_HOMING 1       // (in mm) Raise Z before homing (G28) for Probe Clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case
 
   #define XY_TRAVEL_SPEED 5000         // X and Y axis travel speed between probes, in mm/min
 
-  #define Z_RAISE_BEFORE_PROBING 4    //How much the extruder will be raised before traveling to the first probing point.
-  #define Z_RAISE_BETWEEN_PROBINGS 5  //How much the extruder will be raised when traveling from between next probing points
+  #define Z_RAISE_BEFORE_PROBING 1    //How much the extruder will be raised before traveling to the first probing point.
+  #define Z_RAISE_BETWEEN_PROBINGS 1  //How much the extruder will be raised when traveling from between next probing points
 
   //#define Z_PROBE_SLED // turn on if you have a z-probe mounted on a sled like those designed by Charles Bell
   //#define SLED_DOCKING_OFFSET 5 // the extra distance the X axis must travel to pickup the sled. 0 should be fine but you can push it further if you'd like.
@@ -520,7 +521,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #ifdef CUSTOM_M_CODES
   #define CUSTOM_M_CODE_SET_Z_PROBE_OFFSET 851
   #define Z_PROBE_OFFSET_RANGE_MIN -15
-  #define Z_PROBE_OFFSET_RANGE_MAX -5
+  #define Z_PROBE_OFFSET_RANGE_MAX 0
 #endif
 
 
@@ -547,7 +548,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 //LCD and SD support
 #define ULTRA_LCD  //general LCD support, also 16x2
 //#define DOGLCD  // Support for SPI LCD 128x64 (Controller ST7565R graphic Display Family)
-#define SDSUPPORT // Enable SD Card Support in Hardware Console
+//#define SDSUPPORT // Enable SD Card Support in Hardware Console
 //#define SDSLOW // Use slower SD transfer mode (not normally needed - uncomment if you're getting volume init error)
 //#define SD_CHECK_AND_RETRY // Use CRC checks and retries on the SD communication
 //#define ENCODER_PULSES_PER_STEP 1 // Increase if you have a high resolution encoder
