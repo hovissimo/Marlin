@@ -354,12 +354,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = false;
 #define DISABLE_E false // For all extruders
 #define DISABLE_INACTIVE_EXTRUDER true //disable only inactive extruders and keep active extruder enabled
 
-#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+#define INVERT_X_DIR false
+// So this is dumb.  To get my X-axis NOT mirrored, I need to set the X invert to FALSE and also reverse the stepper wires.
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
-#define INVERT_E0_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
+#define INVERT_Z_DIR true
+#define INVERT_E0_DIR false
+#define INVERT_E1_DIR false
+#define INVERT_E2_DIR false
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
@@ -400,7 +401,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false;
 //    Probe 3 arbitrary points on the bed (that aren't colinear)
 //    You must specify the X & Y coordinates of all 3 points
 
-  #define AUTO_BED_LEVELING_GRID
+  //#define AUTO_BED_LEVELING_GRID
   // with AUTO_BED_LEVELING_GRID, the bed is sampled in a
   // AUTO_BED_LEVELING_GRID_POINTSxAUTO_BED_LEVELING_GRID_POINTS grid
   // and least squares solution is calculated
